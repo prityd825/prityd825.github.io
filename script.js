@@ -63,15 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       const title = btn.getAttribute('data-title');
       const author = btn.getAttribute('data-author');
-      const year = btn.getAttribute('data-year');
+      const year = btn.getAttribute('data-year') || '2026';
       const id = btn.getAttribute('data-id');
+      const doi = btn.getAttribute('data-doi') || '';
+      const url = btn.getAttribute('data-url') || (doi ? `https://doi.org/${doi}` : '');
 
-      const bibtex = `@thesis{${id},
+      const bibtex = `@article{${id},
   title={${title}},
-  author={${author} and others},
-  institution={Institute of Information Technology, Noakhali Science and Technology University},
+  author={${author}},
+  journal={Zenodo},
   year={${year}},
-  url={https://github.com/prityd825/Polyp-Segmentation}
+  doi={${doi}},
+  url={${url}}
 }`;
 
       if (bibtexText) {
