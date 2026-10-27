@@ -1,8 +1,8 @@
 /**
  * ==============================================================================
  * PRITY RANI DAS - MINIMALIST IVY LEAGUE ACADEMIC INTERACTION LOGIC
- * Features: Light/Dark Theme (Default Light), Harvard-style Publication Filter,
- * Collapsible Abstract Drawer, BibTeX Citation Modal, and Form Handling.
+ * Features: Light/Dark Theme, Thesis Abstract Toggle,
+ * BibTeX Citation Modal, and Form Handling.
  * ==============================================================================
  */
 
@@ -38,45 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 2. Publication Filter Tabs
-  const filterTabs = document.querySelectorAll('.filter-tab');
-  const pubEntries = document.querySelectorAll('.pub-entry');
-
-  filterTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      filterTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const filterVal = tab.getAttribute('data-filter');
-
-      pubEntries.forEach(entry => {
-        const cat = entry.getAttribute('data-category') || '';
-        if (filterVal === 'all' || cat.includes(filterVal)) {
-          entry.style.display = 'grid';
-        } else {
-          entry.style.display = 'none';
-        }
-      });
+  // 2. Thesis Abstract Toggle
+  const toggleThesisAbsBtn = document.getElementById('toggle-thesis-abs-btn');
+  const thesisAbstract = document.getElementById('thesis-abstract');
+  if (toggleThesisAbsBtn && thesisAbstract) {
+    toggleThesisAbsBtn.addEventListener('click', () => {
+      thesisAbstract.classList.toggle('open');
+      const isOpen = thesisAbstract.classList.contains('open');
+      toggleThesisAbsBtn.innerHTML = isOpen
+        ? `<i class="fa-solid fa-chevron-up"></i> <span>Hide Abstract</span>`
+        : `<i class="fa-solid fa-align-left"></i> <span>Read Abstract</span>`;
     });
-  });
+  }
 
-  // 3. Collapsible Abstract Drawer
-  const toggleAbsBtns = document.querySelectorAll('.toggle-abs-btn');
-  toggleAbsBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-target');
-      const drawer = document.getElementById(targetId);
-      if (drawer) {
-        drawer.classList.toggle('open');
-        const isOpen = drawer.classList.contains('open');
-        btn.innerHTML = isOpen
-          ? `<i class="fa-solid fa-chevron-up"></i> Hide Abstract`
-          : `<i class="fa-solid fa-align-left"></i> Abstract`;
-      }
-    });
-  });
-
-  // 4. BibTeX Citation Generator & Modal
+  // 3. BibTeX Citation Generator & Modal
   const bibtexModal = document.getElementById('bibtex-modal');
   const bibtexText = document.getElementById('bibtex-text');
   const modalCloseBtn = document.getElementById('modal-close-btn');
@@ -91,12 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const year = btn.getAttribute('data-year');
       const id = btn.getAttribute('data-id');
 
-      const bibtex = `@article{${id},
+      const bibtex = `@thesis{${id},
   title={${title}},
   author={${author} and others},
-  journal={Official Implementation & Research Manuscript},
+  institution={Institute of Information Technology, Noakhali Science and Technology University},
   year={${year}},
-  url={https://github.com/prityd825}
+  url={https://github.com/prityd825/Polyp-Segmentation}
 }`;
 
       if (bibtexText) {
@@ -135,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Contact Form Dispatcher (Mailto Fallback)
+  // 4. Contact Form Dispatcher (Mailto Fallback)
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -154,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Minimalist Toast Notification
+  // 5. Toast Notification
   function showToast(message) {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toast-message');

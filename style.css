@@ -11,7 +11,7 @@
   --bg-subtle: #f8fafc;
   --bg-card: #ffffff;
   --bg-hover: #f1f5f9;
-  --bg-nav: rgba(255, 255, 255, 0.92);
+  --bg-nav: rgba(255, 255, 255, 0.94);
 
   --border-light: #e2e8f0;
   --border-medium: #cbd5e1;
@@ -54,7 +54,7 @@
   --bg-subtle: #111726;
   --bg-card: #151d30;
   --bg-hover: #1e293b;
-  --bg-nav: rgba(11, 15, 23, 0.92);
+  --bg-nav: rgba(11, 15, 23, 0.94);
 
   --border-light: rgba(255, 255, 255, 0.08);
   --border-medium: rgba(255, 255, 255, 0.16);
@@ -80,9 +80,7 @@
   --shadow-elevated: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* ==========================================================================
-   Base Styles & Resets
-   ========================================================================== */
+/* Base */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -110,18 +108,11 @@ body {
   padding: 0 2rem;
 }
 
-/* Typography Hierarchy */
 h1, h2, h3, h4 {
   color: var(--text-primary);
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
   line-height: 1.25;
-}
-
-.serif-heading {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  letter-spacing: -0.01em;
 }
 
 p {
@@ -135,9 +126,7 @@ a {
   transition: color var(--transition);
 }
 
-/* ==========================================================================
-   Header & Clean Minimal Navigation
-   ========================================================================== */
+/* Nav */
 .site-nav {
   position: sticky;
   top: 0;
@@ -186,7 +175,6 @@ a {
   font-size: 0.92rem;
   font-weight: 500;
   color: var(--text-secondary);
-  position: relative;
   transition: color var(--transition);
 }
 
@@ -220,9 +208,7 @@ a {
   border-color: var(--border-medium);
 }
 
-/* ==========================================================================
-   Hero Profile Section (Ivy League Editorial Look)
-   ========================================================================== */
+/* Hero */
 .hero-section {
   padding: 4.5rem 0 3.5rem 0;
   border-bottom: 1px solid var(--border-light);
@@ -261,7 +247,7 @@ a {
 }
 
 .hero-role-line {
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 500;
   color: var(--text-academic);
   display: flex;
@@ -281,7 +267,6 @@ a {
   max-width: 680px;
 }
 
-/* Academic Key Facts Strip */
 .academic-metrics-strip {
   display: flex;
   flex-wrap: wrap;
@@ -363,9 +348,7 @@ a {
   font-size: 0.82rem;
 }
 
-/* ==========================================================================
-   Section Headers
-   ========================================================================== */
+/* Section Structure */
 .section-block {
   padding: 3.5rem 0;
   border-bottom: 1px solid var(--border-light);
@@ -397,191 +380,205 @@ a {
   color: var(--text-muted);
 }
 
-/* ==========================================================================
-   Research Objective & Scholar Callout Box
-   ========================================================================== */
-.scholarship-callout {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-light);
+/* Dedicated Academic Thesis Feature Card */
+.thesis-feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
   border-left: 4px solid var(--accent-primary);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: 1.75rem 2rem;
-  margin-bottom: 2rem;
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
 }
 
-.callout-title {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
+.thesis-meta-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.thesis-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--accent-badge-bg);
+  border: 1px solid var(--accent-badge-border);
+  color: var(--accent-badge-text);
 }
 
-.callout-body {
+.thesis-institution {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.thesis-title-text {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+.thesis-authors-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.thesis-authors-text strong {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.thesis-summary-para {
   font-size: 0.98rem;
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
-/* ==========================================================================
-   Publications List (Harvard/MIT Academic Clean Style)
-   ========================================================================== */
-.pub-category-filter {
+.thesis-key-points {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  font-size: 0.88rem;
+}
+
+.thesis-point-item strong {
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.thesis-abstract-drawer {
+  display: none;
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--accent-primary);
+  padding: 1.25rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.thesis-abstract-drawer.open {
+  display: block;
+}
+
+.thesis-actions-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Projects Grid & Cards */
+.projects-filter-bar {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
-.filter-tab {
-  background: transparent;
+.projects-list-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.project-item-card {
+  background: var(--bg-card);
   border: 1px solid var(--border-light);
-  color: var(--text-secondary);
-  padding: 0.4rem 0.95rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.82rem;
-  font-weight: 500;
-  cursor: pointer;
+  border-radius: var(--radius-md);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--shadow-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
   transition: all var(--transition);
 }
 
-.filter-tab:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
+.project-item-card:hover {
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
 }
 
-.filter-tab.active {
-  background: var(--text-primary);
-  color: var(--bg-page);
-  border-color: var(--text-primary);
-}
-
-.pub-entry-list {
+.project-top-row {
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
-.pub-entry {
-  display: grid;
-  grid-template-columns: 36px 1fr;
-  gap: 1.25rem;
-  align-items: start;
-}
-
-.pub-number {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  padding-top: 3px;
-}
-
-.pub-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-
-.pub-title-link {
+.project-headline-title {
   font-family: var(--font-heading);
-  font-size: 1.18rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.4;
 }
 
-.pub-title-link:hover {
+.project-headline-title:hover {
   color: var(--accent-primary);
 }
 
-.pub-authors-line {
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-}
-
-.author-me {
-  color: var(--text-primary);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.pub-venue-line {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  font-style: italic;
-  font-family: var(--font-serif);
-}
-
-.pub-summary-text {
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.65;
-  margin-top: 0.2rem;
-}
-
-.pub-abstract-drawer {
-  display: none;
-  background: var(--bg-subtle);
-  border-left: 2px solid var(--border-medium);
-  padding: 1rem 1.25rem;
-  margin-top: 0.65rem;
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.65;
-}
-
-.pub-abstract-drawer.open {
-  display: block;
-}
-
-.pub-tags-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.4rem;
-}
-
-.tag-badge {
-  font-size: 0.74rem;
-  padding: 0.15rem 0.55rem;
+.project-badge-pill {
+  font-size: 0.76rem;
+  padding: 0.2rem 0.6rem;
   border-radius: var(--radius-sm);
   background: var(--tag-bg);
   border: 1px solid var(--tag-border);
   color: var(--tag-text);
   font-family: var(--font-mono);
+  font-weight: 500;
 }
 
-.pub-links-row {
+.project-narrative-desc {
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.project-footer-links {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 0.85rem;
-  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px dotted var(--border-light);
 }
 
-.pub-link-btn {
-  font-size: 0.82rem;
+.project-footer-links a {
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--accent-primary);
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: color var(--transition);
+  gap: 0.4rem;
 }
 
-.pub-link-btn:hover {
+.project-footer-links a:hover {
   text-decoration: underline;
 }
 
-/* ==========================================================================
-   Two Column Grid: Experience & Education
-   ========================================================================== */
+/* Two Column Grid */
 .two-col-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -662,55 +659,7 @@ a {
   margin: 0.4rem 0 0.6rem 0;
 }
 
-/* ==========================================================================
-   Engineering Projects & Systems
-   ========================================================================== */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.project-card-clean {
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  box-shadow: var(--shadow-subtle);
-  transition: all var(--transition);
-}
-
-.project-card-clean:hover {
-  border-color: var(--border-medium);
-  box-shadow: var(--shadow-card);
-  transform: translateY(-2px);
-}
-
-.project-title-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.project-clean-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.project-clean-desc {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  flex-grow: 1;
-}
-
-/* ==========================================================================
-   Technical Skills (Compact Minimalist Cloud)
-   ========================================================================== */
+/* Skills */
 .skills-block-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -753,9 +702,7 @@ a {
   font-family: var(--font-mono);
 }
 
-/* ==========================================================================
-   Contact & Footer
-   ========================================================================== */
+/* Contact */
 .contact-clean-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -839,9 +786,7 @@ a {
   gap: 1rem;
 }
 
-/* ==========================================================================
-   BibTeX Modal & Toast
-   ========================================================================== */
+/* Modals & Toast */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -923,9 +868,7 @@ a {
   transform: translateY(0);
 }
 
-/* ==========================================================================
-   Responsive Adaptations
-   ========================================================================== */
+/* Responsive */
 @media (max-width: 768px) {
   .hero-layout {
     grid-template-columns: 1fr;
@@ -937,9 +880,9 @@ a {
     justify-content: center;
   }
 
-  .two-col-grid, .contact-clean-grid, .skills-block-grid {
+  .two-col-grid, .contact-clean-grid, .skills-block-grid, .thesis-key-points {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   .nav-links {
