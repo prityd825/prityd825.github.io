@@ -5,7 +5,7 @@
 ## 🌟 Key Highlights & Sections
 
 1. **Header & Hero Section**:
-   - Academic status: Prospective Graduate Applicant (Fall '26/27) & Software Engineer at BRAC IT Services Ltd.
+   - Academic status:  Software Engineer at BRAC IT Services Ltd.
    - Core metrics: B.Sc. in Software Engineering, IIT NSTU (CGPA: 3.66/4.00, 5th in Department).
    - Direct download button for Academic CV (PDF).
    - Social & code profile links (GitHub, LinkedIn, Email).
