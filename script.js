@@ -1,24 +1,24 @@
 /**
  * ==============================================================================
- * PRITY RANI DAS - ACADEMIC PORTFOLIO INTERACTIVE LOGIC
- * Features: Dark/Light Mode, Filterable Papers, Abstract Toggling,
- * BibTeX Citation Modal, Smooth Scroll, and Contact Dispatch.
+ * PRITY RANI DAS - MINIMALIST IVY LEAGUE ACADEMIC INTERACTION LOGIC
+ * Features: Light/Dark Theme (Default Light), Harvard-style Publication Filter,
+ * Collapsible Abstract Drawer, BibTeX Citation Modal, and Form Handling.
  * ==============================================================================
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Theme Management (Dark / Light Theme with localStorage persistence)
+  // 1. Theme Management (Default: Clean Minimal Light)
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const htmlRoot = document.documentElement;
 
-  const savedTheme = localStorage.getItem('prity-portfolio-theme') || 'dark';
+  const savedTheme = localStorage.getItem('prity-portfolio-theme') || 'light';
   setTheme(savedTheme);
 
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      const currentTheme = htmlRoot.getAttribute('data-theme') || 'dark';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      const currentTheme = htmlRoot.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       setTheme(newTheme);
       showToast(`Switched to ${newTheme === 'dark' ? 'Dark' : 'Light'} Mode`);
     });
@@ -29,131 +29,62 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('prity-portfolio-theme', theme);
     if (themeIcon) {
       if (theme === 'dark') {
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-      } else {
         themeIcon.classList.remove('fa-moon');
         themeIcon.classList.add('fa-sun');
-      }
-    }
-  }
-
-  // 2. Navbar Scroll Glass Effect & Active Link Tracking
-  const navbar = document.getElementById('navbar');
-  const sections = document.querySelectorAll('section[id], header[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-
-    // ScrollSpy for Active Links
-    let currentSection = '';
-    const scrollPos = window.scrollY + 200;
-
-    sections.forEach(sec => {
-      const top = sec.offsetTop;
-      const height = sec.offsetHeight;
-      if (scrollPos >= top && scrollPos < top + height) {
-        currentSection = sec.getAttribute('id');
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${currentSection}`) {
-        link.classList.add('active');
-      }
-    });
-  });
-
-  // 3. Mobile Navigation Menu Toggle
-  const mobileToggle = document.getElementById('mobile-toggle');
-  const navMenu = document.getElementById('nav-menu');
-  const menuIcon = document.getElementById('menu-icon');
-
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      if (navMenu.classList.contains('open')) {
-        menuIcon.classList.remove('fa-bars');
-        menuIcon.classList.add('fa-xmark');
       } else {
-        menuIcon.classList.remove('fa-xmark');
-        menuIcon.classList.add('fa-bars');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
       }
-    });
-
-    // Close mobile menu on link click
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        if (menuIcon) {
-          menuIcon.classList.remove('fa-xmark');
-          menuIcon.classList.add('fa-bars');
-        }
-      });
-    });
+    }
   }
 
-  // 4. Research Publications Filtering
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const pubCards = document.querySelectorAll('.pub-card');
+  // 2. Publication Filter Tabs
+  const filterTabs = document.querySelectorAll('.filter-tab');
+  const pubEntries = document.querySelectorAll('.pub-entry');
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      filterTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
 
-      const filterValue = btn.getAttribute('data-filter');
+      const filterVal = tab.getAttribute('data-filter');
 
-      pubCards.forEach(card => {
-        const categories = card.getAttribute('data-category') || '';
-        if (filterValue === 'all' || categories.includes(filterValue)) {
-          card.style.display = 'grid';
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, 50);
+      pubEntries.forEach(entry => {
+        const cat = entry.getAttribute('data-category') || '';
+        if (filterVal === 'all' || cat.includes(filterVal)) {
+          entry.style.display = 'grid';
         } else {
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(10px)';
-          setTimeout(() => {
-            card.style.display = 'none';
-          }, 200);
+          entry.style.display = 'none';
         }
       });
     });
   });
 
-  // 5. Toggle Abstract Expansion
-  const toggleAbstractBtns = document.querySelectorAll('.toggle-abstract-btn');
-  toggleAbstractBtns.forEach(btn => {
+  // 3. Collapsible Abstract Drawer
+  const toggleAbsBtns = document.querySelectorAll('.toggle-abs-btn');
+  toggleAbsBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
-      const abstractEl = document.getElementById(targetId);
-      if (abstractEl) {
-        abstractEl.classList.toggle('show');
-        const isShown = abstractEl.classList.contains('show');
-        btn.innerHTML = isShown 
-          ? `<i class="fa-solid fa-chevron-up"></i> <span>Hide Abstract</span>`
-          : `<i class="fa-solid fa-align-left"></i> <span>Toggle Abstract</span>`;
+      const drawer = document.getElementById(targetId);
+      if (drawer) {
+        drawer.classList.toggle('open');
+        const isOpen = drawer.classList.contains('open');
+        btn.innerHTML = isOpen
+          ? `<i class="fa-solid fa-chevron-up"></i> Hide Abstract`
+          : `<i class="fa-solid fa-align-left"></i> Abstract`;
       }
     });
   });
 
-  // 6. BibTeX Citation Modal & Copy to Clipboard
+  // 4. BibTeX Citation Generator & Modal
   const bibtexModal = document.getElementById('bibtex-modal');
   const bibtexText = document.getElementById('bibtex-text');
   const modalCloseBtn = document.getElementById('modal-close-btn');
   const modalCancelBtn = document.getElementById('modal-cancel-btn');
   const modalCopyBtn = document.getElementById('modal-copy-btn');
-  const citeButtons = document.querySelectorAll('.copy-bibtex-btn');
+  const citeBtns = document.querySelectorAll('.cite-btn');
 
-  citeButtons.forEach(btn => {
+  citeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const title = btn.getAttribute('data-title');
       const author = btn.getAttribute('data-author');
@@ -178,9 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function closeModal() {
-    if (bibtexModal) {
-      bibtexModal.classList.remove('open');
-    }
+    if (bibtexModal) bibtexModal.classList.remove('open');
   }
 
   if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
@@ -196,17 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (bibtexText) {
         navigator.clipboard.writeText(bibtexText.textContent)
           .then(() => {
-            showToast('BibTeX copied to clipboard!');
+            showToast('BibTeX citation copied to clipboard');
             closeModal();
           })
           .catch(() => {
-            showToast('Failed to copy. Please manually copy the text.');
+            showToast('Please manually copy the citation snippet');
           });
       }
     });
   }
 
-  // 7. Interactive Contact Form Dispatch
+  // 5. Contact Form Dispatcher (Mailto Fallback)
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -216,17 +145,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const subject = document.getElementById('sender-subject')?.value || '';
       const message = document.getElementById('sender-message')?.value || '';
 
-      // Prepare mailto link as direct client fallback
       const mailtoUrl = `mailto:prity.rani.das@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
-      
-      showToast('Opening your email client to dispatch message...');
+
+      showToast('Opening default email application...');
       setTimeout(() => {
         window.location.href = mailtoUrl;
       }, 700);
     });
   }
 
-  // 8. Toast Feedback Utility
+  // 6. Minimalist Toast Notification
   function showToast(message) {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toast-message');
@@ -237,6 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       toast.classList.remove('show');
-    }, 3200);
+    }, 2800);
   }
 });
