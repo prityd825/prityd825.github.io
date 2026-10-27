@@ -1,8 +1,6 @@
 # Prity Rani Das - Academic & Research Portfolio 🎓
 
-A modern, high-performance personal academic and research portfolio website tailored for overseas graduate admissions (M.Sc. / Ph.D. scholarships) and enterprise software engineering roles.
 
----
 
 ## 🌟 Key Highlights & Sections
 
